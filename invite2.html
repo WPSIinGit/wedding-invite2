@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Wedding Invitation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin:0;
+  font-family:'Playfair Display', serif;
+  background:linear-gradient(to bottom, #e6f4ea, #cde7d8);
+  text-align:center;
+  overflow-x:hidden;
+}
+
+/* ENVELOPE */
+#envelopeScreen {
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+.envelope {
+  width:280px;
+  height:180px;
+  background:#d8f3dc;
+  border-radius:12px;
+  position:relative;
+  cursor:pointer;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  border:1px solid #95d5b2;
+}
+
+.envelope:before {
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  border-left:140px solid transparent;
+  border-right:140px solid transparent;
+  border-bottom:90px solid #b7e4c7;
+}
+
+.open-text {
+  margin-top:20px;
+  font-family:'Great Vibes', cursive;
+  font-size:24px;
+  color:#2f5d50;
+}
+
+/* MAIN */
+#mainContent {
+  display:none;
+}
+
+/* CARD */
+.card {
+  background:white;
+  margin:40px auto;
+  padding:30px;
+  max-width:500px;
+  border:2px solid #d4a373;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.15);
+}
+
+h1 {
+  font-family:'Great Vibes', cursive;
+  font-size:42px;
+  color:#2f5d50;
+}
+
+h2 {
+  color:#7fbf9b;
+}
+
+.text {
+  font-size:16px;
+  color:#444;
+  line-height:1.8;
+}
+
+.btn {
+  display:inline-block;
+  margin-top:15px;
+  padding:12px 20px;
+  background:#2f5d50;
+  color:white;
+  border-radius:25px;
+  text-decoration:none;
+}
+
+.music-btn {
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:#2f5d50;
+  color:white;
+  border:none;
+  padding:10px 15px;
+  border-radius:20px;
+}
+
+/* ⭐ STARS */
+.star {
+  position:fixed;
+  top:-50px;
+  animation:fall linear infinite;
+}
+
+@keyframes fall {
+  to { transform:translateY(110vh) rotate(360deg); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ENVELOPE -->
+<div id="envelopeScreen">
+  <div class="envelope" id="envelope"></div>
+  <p class="open-text">Open Invitation 💌</p>
+</div>
+
+<!-- MAIN -->
+<div id="mainContent">
+
+<button class="music-btn" onclick="toggleMusic()">🎶</button>
+
+<audio id="music" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+
+  <h2>Wedding Invitation</h2>
+
+  <p class="text">
+  "What God has joined together, let no one separate."
+  </p>
+
+  <h1>Jesus Rockinson</h1>
+  <h2>&</h2>
+  <h1>Ruth Dileshana</h1>
+
+  <p class="text">
+  📅 27 April 2026<br>
+  ⏰ 09:30 AM
+  </p>
+
+  <p class="text">
+  ⛪ St. Antony’s Church, Passaiyoor
+  </p>
+
+  <p class="text">
+  🍽 Reception<br>
+  J Hotels – Green Baryan Hall<br>
+  Jaffna
+  </p>
+
+  <a class="btn" href="https://maps.google.com">
+    📍 View Location
+  </a>
+
+</div>
+
+</div>
+
+<script>
+
+let music = document.getElementById("music");
+
+document.getElementById("envelope").addEventListener("click", function(){
+
+  document.getElementById("envelopeScreen").style.display="none";
+  document.getElementById("mainContent").style.display="block";
+
+  // ⭐ stars
+  setInterval(()=>{
+    let s=document.createElement("div");
+    s.className="star";
+    s.innerHTML="⭐";
+    s.style.left=Math.random()*100+"vw";
+    s.style.animationDuration=(5+Math.random()*5)+"s";
+    s.style.fontSize=(15+Math.random()*15)+"px";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),8000);
+  },500);
+
+  if(music){
+    music.volume = 0.7;
+    music.play().catch(()=>{});
+  }
+
+});
+
+function toggleMusic(){
+  if(music.paused){
+    music.play();
+  } else {
+    music.pause();
+  }
+}
+
+</script>
+
+</body>
+</html>
